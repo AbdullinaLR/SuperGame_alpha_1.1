@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractableItem : MonoBehaviour
 {
     [SerializeField]
     private GameObject pickUpUI;
+
+    [SerializeField]
+    private Sprite pickUpSprite; 
 
     private bool pickUpAllowed;
 
@@ -44,5 +48,23 @@ public class InteractableItem : MonoBehaviour
     {
         Destroy(gameObject);
         pickUpUI.SetActive(false);
+        ShowPickUpImage(); 
+    }
+
+    private void ShowPickUpImage()
+    {
+        GameObject pickUpImageUI = new GameObject("PickUpImage");
+        pickUpImageUI.transform.SetParent(GameObject.Find("UI Elements (Canvas)").transform, false);
+
+        Image imageComponent = pickUpImageUI.AddComponent<Image>();
+        imageComponent.sprite = pickUpSprite;
+
+        RectTransform rectTransform = pickUpImageUI.GetComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(600, 400); // меняем туда сюда подгоняем для красот
+        rectTransform.anchorMin = new Vector2(0.5f, 0.5f); 
+        rectTransform.anchorMax = new Vector2(0.5f, 0.5f); 
+        rectTransform.anchoredPosition = Vector2.zero; 
+
+        Destroy(pickUpImageUI, 5f);
     }
 }

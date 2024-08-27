@@ -8,15 +8,33 @@ public class SceneSettings : MonoBehaviour
     public GameObject PausePanel, Inventory, tapEffect;
     public int level;
 
-    public void Start()
+    void Start()
     {
-        PausePanel.SetActive(false);  //панель паузы выключена при старте игры, иначе не работает!!
+        PausePanel.SetActive(false);  // Панель паузы выключена при старте игры
+    }
+
+    void Update()
+    {
+        // Проверка нажатия клавиши Escape или нажатия мыши
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseButtonPressed();
+        }
     }
 
     public void PauseButtonPressed()
     {
-        PausePanel.SetActive(true);
-        Time.timeScale = 0f;
+        // Переключаем состояние панели паузы
+        PausePanel.SetActive(!PausePanel.activeSelf);
+
+        if (PausePanel.activeSelf)
+        {
+            Time.timeScale = 0f; // Ставим игру на паузу
+        }
+        else
+        {
+            Time.timeScale = 1f; // Продолжаем игру
+        }
     }
 
     public void NextLevel()
