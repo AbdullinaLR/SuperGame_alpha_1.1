@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueAnimator : MonoBehaviour
+public class MCDialogueAnimator : MonoBehaviour
 {
   public Animator startAnim;
-  public DialogueManager dm;
+  public MCDialougeManager dm2;
 
  public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            startAnim.SetBool("startopen", true);
+            startAnim.SetBool("MCthink", true);
         }
     }
   
 
    public void OnTriggerExit2D(Collider2D other)
   {
-    startAnim.SetBool("startopen", false);
-    dm.EndDialogue();
+    startAnim.SetBool("MCthink", false);
+    dm2.EndDialogue();
   }
 }
