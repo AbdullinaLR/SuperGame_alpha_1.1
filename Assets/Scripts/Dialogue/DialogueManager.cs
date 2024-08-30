@@ -7,6 +7,7 @@ public class DialogueManager : MonoBehaviour
 {
    public Text dialogueText;
    public Text nameText;
+  [SerializeField] private AudioSource talkingSound;
 
    public Animator boxAnim;
    public Animator startAnim;
@@ -20,6 +21,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        talkingSound.Play();
         boxAnim.SetBool("boxOpen", true);
         startAnim.SetBool("startopen", false);
 
@@ -42,6 +44,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         string sentence = sentences.Dequeue();
+        talkingSound.Play();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }

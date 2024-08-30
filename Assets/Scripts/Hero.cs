@@ -7,9 +7,8 @@ public class player : MonoBehaviour
     [SerializeField] private float speed = 3f; 
     [SerializeField] private float jumpForce = 15f; 
     private bool isGrounded = false; 
- 
- 
- 
+
+    [SerializeField] private AudioSource awakeSound;
     private Rigidbody2D rb; 
     private Animator anim;
     private SpriteRenderer sprite; 
@@ -25,6 +24,7 @@ public class player : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>(); 
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>(); 
+        awakeSound.Play();
     } 
  
     private void Run() 

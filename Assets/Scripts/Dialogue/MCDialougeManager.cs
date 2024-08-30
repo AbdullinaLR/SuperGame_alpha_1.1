@@ -7,7 +7,7 @@ public class MCDialougeManager : MonoBehaviour
 {
    public Text dialogueText;
    public Text nameText;
-
+  [SerializeField] private AudioSource thinkingSound;
    public Animator boxAnim;
    public Animator startAnim;
 
@@ -20,10 +20,11 @@ public class MCDialougeManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        thinkingSound.Play();
         boxAnim.SetBool("boxOpen", true);
         startAnim.SetBool("MCthink", false);
-
         nameText.text = dialogue.name;
+        
         sentences.Clear();
 
         foreach(string sentence in dialogue.sentences)
@@ -40,8 +41,10 @@ public class MCDialougeManager : MonoBehaviour
             EndDialogue();
             return;
         }
-
+        
+        thinkingSound.Play();
         string sentence = sentences.Dequeue();
+        thinkingSound.Play();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
